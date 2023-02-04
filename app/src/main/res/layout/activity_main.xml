@@ -8,94 +8,99 @@
 
     <EditText
         android:id="@+id/numOfPeopleEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:ems="5"
+        android:hint="..."
         android:inputType="number"
-        tools:layout_editor_absoluteX="194dp"
-        tools:layout_editor_absoluteY="141dp" />
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/tipPercEditText" />
 
     <EditText
         android:id="@+id/tipPercEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:ems="5"
+        android:hint="..."
         android:inputType="number"
-        tools:layout_editor_absoluteX="204dp"
-        tools:layout_editor_absoluteY="85dp" />
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/totalBillEditText" />
 
     <EditText
         android:id="@+id/totalBillEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:ems="5"
+        android:hint="..."
         android:inputType="numberDecimal"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/numOfPeopleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
         android:text="Number of People:"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="156dp" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tipPercTextView" />
 
     <TextView
         android:id="@+id/tipPercTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="106dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
         android:text="Tip Percentage:"
-        app:layout_constraintBottom_toTopOf="@+id/numOfPeopleTextView"
         app:layout_constraintEnd_toStartOf="@+id/tipPercEditText"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/totalBillEditText"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintTop_toBottomOf="@+id/totalBillTextView" />
 
     <TextView
         android:id="@+id/totalBillTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
         android:text="Total Bill:"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="40dp" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/calcButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="21dp"
+        android:layout_marginTop="32dp"
         android:text="CALCULATE"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/totalText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numOfPeopleEditText"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/numOfPeopleEditText" />
 
     <TextView
         android:id="@+id/totalText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="Total Per Person:"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.422" />
+        app:layout_constraintTop_toBottomOf="@+id/calcButton" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="205dp" />
+        app:layout_constraintGuide_percent="0.50121653" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
