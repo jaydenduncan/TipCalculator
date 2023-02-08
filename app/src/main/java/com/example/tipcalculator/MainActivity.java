@@ -3,7 +3,6 @@ package com.example.tipcalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
@@ -12,6 +11,7 @@ import com.example.tipcalculator.databinding.ActivityMainBinding;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         EditText editText2 = binding.tipPercEditText;
         EditText editText3 = binding.numOfPeopleEditText;
 
+        DecimalFormat df = new DecimalFormat("0.00");
+
         binding.calcButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,17 +39,21 @@ public class MainActivity extends AppCompatActivity {
                     if(!(editText1.getText().toString().equals("0")) && !(editText2.getText().toString().equals("0"))
                     && !(editText3.getText().toString().equals("0"))){
                         String totalBillText = editText1.getText().toString();
-                        BigDecimal totalBill = new BigDecimal(totalBillText);
+
+                        double totalBill = Double.valueOf(totalBillText);
 
                         String tipPercText = editText2.getText().toString();
-                        BigDecimal tipPerc = new BigDecimal(tipPercText);
+
+                        int tipPerc = Integer.valueOf(tipPercText);
 
                         String numOfPeopleText = editText3.getText().toString();
-                        BigDecimal numOfPeople = new BigDecimal(numOfPeopleText);
 
-                        BigDecimal result = calculateResult(totalBill, tipPerc, numOfPeople);
+                        int numOfPeople = Integer.valueOf(numOfPeopleText);
 
-                        binding.totalText.setText("Total Per Person: $" + result.toString());
+                        double result = calculateResult(totalBill, tipPerc, numOfPeople);
+                        String finalResult = df.format(result);
+
+                        binding.totalText.setText("Total Per Person: $" + finalResult);
                     }
 
                 }
@@ -59,24 +65,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private BigDecimal calculateResult(BigDecimal tb, BigDecimal tp, BigDecimal nop){
+    private double calculateResult(double tb, int tp, int nop){
         BigDecimal totalBill = new BigDecimal(String.valueOf(tb));
-        BigDecimal divisor = new BigDecimal("100");
-        MathContext mc = new MathContext(4, RoundingMode.HALF_UP);
+        BigDecimal totalPerc = new BigDecimal(String.valueOf(tp));
+        BigDecimal numOfPeople = new BigDecimal(String.valueOf(nop));
 
         // calculate subtotal paid per person
-        BigDecimal totalBillPerPerson = totalBill.divide(nop, 2, RoundingMode.HALF_UP); // divide total bill by the number of people
+        BigDecimal totalBillPerPerson = totalBill.divide(numOfPeople, 2, RoundingMode.HALF_UP);
 
         // calculate tip percentage
-        BigDecimal tipDecimal = tp.divide(divisor, 2, RoundingMode.HALF_UP);
-        BigDecimal totalTip = tipDecimal.multiply(tb, mc);
+        BigDecimal tipDecimal = totalPerc.divide(new BigDecimal("100.0"),  2, RoundingMode.HALF_UP);
+        BigDecimal totalTip = tipDecimal.multiply(totalBill);
+        totalTip.setScale(2, RoundingMode.HALF_UP);
 
         // divide tip by each person
-        BigDecimal tipPerPerson = totalTip.divide(nop, 2, RoundingMode.HALF_UP);
+        BigDecimal tipPerPerson = totalTip.divide(numOfPeople,  2, RoundingMode.HALF_UP);
 
         // add tip percentage to subtotal
-        BigDecimal result = totalBillPerPerson.add(tipPerPerson, mc);
+        BigDecimal result = totalBillPerPerson.add(tipPerPerson);
+        result.setScale(2, RoundingMode.HALF_UP);
 
-        return result;
+        return result.doubleValue();
     }
 }
